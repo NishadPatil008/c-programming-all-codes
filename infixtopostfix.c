@@ -7,13 +7,12 @@ char stack[50];
 
 int main()
 {
-    char arr[] = "(a+(b*c)/(d-e))"; // ✅ Keep only one declaration
+    char arr[] = "(a+(b*c)/(d-e))"; // ✅ Only one declaration
     char opp[50];
-    int n = strlen(arr); // ✅ Use actual length
-    int count = 0;
-    int printCount = n;
+    int n = strlen(arr), count = 0;
     char perfix_arr[50];
 
+    // Reverse and swap brackets
     for (int i = 0; i < n; i++)
         perfix_arr[i] = arr[i];
 
@@ -27,6 +26,7 @@ int main()
             arr[n - i - 1] = perfix_arr[i];
     }
 
+    // Infix to Postfix (on reversed expression)
     for (int i = 0; i < n; i++)
     {
         if ((arr[i] >= 'a' && arr[i] <= 'z') || (arr[i] >= 'A' && arr[i] <= 'Z'))
@@ -53,7 +53,7 @@ int main()
             }
             else if (arr[i] == '^')
             {
-                while (top != -1 && stack[top] == '^') // ✅ Added top != -1 check
+                while (top != -1 && stack[top] == '^') // ✅ Added top check
                 {
                     opp[count++] = stack[top--]; // pop and adding
                 }
@@ -62,11 +62,10 @@ int main()
             else if (arr[i] == '(')
             {
                 stack[++top] = arr[i]; // push
-                // ✅ Removed printCount -= 2; (not needed)
             }
             else if (arr[i] == ')')
             {
-                while (top != -1 && stack[top] != '(') // ✅ Added top != -1 check
+                while (top != -1 && stack[top] != '(') // ✅ Added top check
                 {
                     opp[count++] = stack[top--]; // pop and adding
                 }
@@ -80,9 +79,17 @@ int main()
         opp[count++] = stack[top--]; // pop remaining elements
     }
 
-    // ✅ Reverse the output to get prefix
+    // ✅ Postfix output (from reversed infix)
+    printf("Postfix: ");
+    for (int i = 0; i < count; i++)
+        printf("%c", opp[i]);
+    printf("\n");
+
+    // ✅ Prefix output (reverse of postfix)
+    printf("Prefix: ");
     for (int i = count - 1; i >= 0; i--)
         printf("%c", opp[i]);
+    printf("\n");
 
     return 0;
 }
