@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int queue[10];
 int front = -1;
@@ -29,12 +28,11 @@ int main() {
                 display();
                 break;
             case 4:
-                exit(0);
+                return 0;
             default:
-                printf("Invalid choice\n");
+                printf("Invalid\n");
         }
     }
-    return 0;
 }
 
 void enqueue(int value) {
