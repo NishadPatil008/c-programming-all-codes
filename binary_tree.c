@@ -5,6 +5,12 @@ struct node {
     struct node *left, *right;
 };
 struct node *root = NULL;
+struct node* create(int data);
+void insert();
+void in_order(struct node *t);
+void pre_order(struct node *t);
+void post_order(struct node *t);
+void search_element();
 int main() {
     int choice;
     while (1) {
@@ -12,22 +18,22 @@ int main() {
         scanf("%d", &choice);
         switch (choice) {
             case 1: 
-            insert(); break;
+                insert(); break;
             case 2: 
-            in_order(root); 
-            printf("\n"); break;
+                in_order(root); 
+                printf("\n"); break;
             case 3: 
-            pre_order(root); 
-            printf("\n"); break;
+                pre_order(root); 
+                printf("\n"); break;
             case 4: 
-            post_order(root); 
-            printf("\n"); break;
+                post_order(root); 
+                printf("\n"); break;
             case 5: 
-            search_element(); break;
+                search_element(); break;
             case 6: 
-            return 0;
+                return 0;
             default: 
-            printf("Invalid choice\n");
+                printf("Invalid choice\n");
         }
     }
     return 0;
